@@ -1,0 +1,8 @@
+[workspace]
+members=[
+    "guess_number",
+    "helloworld", "httpie",
+    "scrape_url",
+    "tests",
+
+]
