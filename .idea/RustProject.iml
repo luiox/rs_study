@@ -7,6 +7,10 @@
       <sourceFolder url="file://$MODULE_DIR$/guess_number/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/tests/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/httpie/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/simple_server/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hello_macro/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mlist/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mverify-server/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/helloworld/target" />
       <excludeFolder url="file://$MODULE_DIR$/scrape_url/target" />
       <excludeFolder url="file://$MODULE_DIR$/guess_number/target" />
