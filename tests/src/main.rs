@@ -109,6 +109,16 @@ impl Point {
     }
 }
 
+trait MyFmtStr {
+    fn to_my_fmt_str(&self)->String;
+}
+
+impl MyFmtStr for i32{
+    fn to_my_fmt_str(&self) -> String {
+        format!("num = {}", self)
+    }
+}
+
 fn main() {
     let p = Point::new(1, 2);
     let p2 = Point {
@@ -139,7 +149,8 @@ fn main() {
     println!("{}", sum2());
 
     let s = "s1".to_string();
-    let a = -1.abs();
+    let a = -1i32.abs();
 
+    println!("{}", 666.to_my_fmt_str());
 
 }
