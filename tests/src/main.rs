@@ -1,3 +1,5 @@
+use std::ops::Add;
+
 enum Direction {
     Up = 0,
     Down,
@@ -5,6 +7,7 @@ enum Direction {
     Right,
 }
 
+#[derive(Debug)]
 struct Point {
     x: i32,
     y: i32,
@@ -81,7 +84,57 @@ fn process_event(e: Event) -> i32 {
     }
 }
 
+fn move_owner(s : String){
+    println!("{}", s);
+}
+
+fn borrow_val(s: &String){
+    println!("{}",s);
+}
+
+fn strcat(dest : &mut String, src : &String){
+    dest.push_str(src);
+}
+struct Id();
+
+impl Point{
+    fn new(x: i32, y: i32) -> Point{
+        Point{
+            x,
+            y,
+        }
+    }
+}
+
+impl Point {
+    fn distance_to(&self, other: &Point) -> i32{
+        let dx = self.x - other.x;
+        let dy = self.y - other.y;
+        dx * dx + dy * dy
+    }
+}
+
+
 fn main() {
+    let p = Point::new(1, 2);
+    let p2 = Point{
+        x: p.x+10,
+        y:p.y
+    };
+    println!("distance = {}", p.distance_to(&p2));
+    println!("{:?}", p);
+
+    let key = KeyVal(1);
+    let id = Id{};
+    let p2 = Point{
+        x: p.x+10,
+        ..p
+    };
+
+
+
+
+
     let n1 = 1;
     let n2: i64 = 2;
     const PI: f64 = 3.141592;
