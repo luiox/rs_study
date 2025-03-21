@@ -191,7 +191,7 @@ where
     }
 }
 
-fn main() {
+fn test1() {
     let gp1 = GPoint { x: 1, y: 2 };
     let gp2 = GPoint { x: 1.0, y: 2.0 };
 
@@ -252,4 +252,13 @@ fn main() {
     let a = -1i32.abs();
 
     println!("{}", 666.to_my_fmt_str());
+}
+
+fn main() {
+    let arr = vec![1, 2, 3,4, 5];
+    for i in arr.iter() {
+        println!("{}", i);
+    }
+    let sum = arr.iter().sum();
+    println!("sum = {}", sum);
 }

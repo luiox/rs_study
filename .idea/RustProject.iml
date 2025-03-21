@@ -11,6 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/hello_macro/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mlist/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mverify-server/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libca/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/helloworld/target" />
       <excludeFolder url="file://$MODULE_DIR$/scrape_url/target" />
       <excludeFolder url="file://$MODULE_DIR$/guess_number/target" />
