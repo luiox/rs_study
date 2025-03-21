@@ -1,4 +1,8 @@
-use std::ops::Add;
+use std::fs::File;
+use std::io::{ErrorKind, Read};
+use std::ops::{Add, Mul, Sub};
+use std::process::Output;
+use std::ptr::read;
 
 enum Direction {
     Up = 0,
@@ -110,16 +114,110 @@ impl Point {
 }
 
 trait MyFmtStr {
-    fn to_my_fmt_str(&self)->String;
+    fn to_my_fmt_str(&self) -> String;
 }
 
-impl MyFmtStr for i32{
+impl MyFmtStr for i32 {
     fn to_my_fmt_str(&self) -> String {
         format!("num = {}", self)
     }
 }
 
+struct Point2(i32, i32);
+
+struct MyBox<T> {
+    value: T,
+}
+impl<T> MyBox<T> {
+    fn new(value: T) -> MyBox<T> {
+        MyBox { value }
+    }
+}
+impl<T> std::ops::Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+impl<T> std::ops::Drop for MyBox<T> {
+    fn drop(&mut self) {
+        println!("drop");
+    }
+}
+
+fn read_config_info(file_path: &str) -> Result<String, std::io::Error> {
+    let mut buffer = String::new();
+    File::open(file_path)?.read_to_string(&mut buffer)?;
+    Ok(buffer)
+}
+
+fn print_number(maybe_number: Option<i32>) {
+    match maybe_number {
+        Some(number) => println!("Number: {}", number),
+        None => println!("No number provided"),
+    }
+}
+
+struct GPoint<T> {
+    x: T,
+    y: T,
+}
+
+trait Compare{
+    fn compare(&self, other: &Self) -> i8;
+}
+
+fn max<T : Compare>(a: T, b: T) -> T {
+    if a.compare(&b) > 0 { a } else { b }
+}
+
+impl<T> GPoint<T>
+where
+    T: Sub<Output = T> + Mul<Output = T> + Copy + PartialOrd + From<u8>
+{
+    fn distance_to(&self, other: &GPoint<T>) -> T
+    where
+        T: std::marker::Copy,
+    {
+        let dx = self.x - other.x;
+        let dy = self.y - other.y;
+        let dx_squared = dx * dx;
+        let dy_squared = dy * dy;
+        let distance_squared = dx_squared + dy_squared;
+
+        // 假设 T 可以调用 sqrt 函数，例如 f32 或 f64
+        T::from(2).sqrt() * distance_squared.sqrt()
+    }
+}
+
 fn main() {
+    let gp1 = GPoint { x: 1, y: 2 };
+    let gp2 = GPoint { x: 1.0, y: 2.0 };
+
+    // let a = 1;
+    // let b = 2;
+    // let c = max(a, b);
+
+    let file_result = File::open("test.txt");
+    match file_result {
+        Ok(file) => println!("file opened"),
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => println!("file not found"),
+            ErrorKind::PermissionDenied => println!("permission denied"),
+            _ => println!("other file error"),
+        },
+    }
+
+    let p2 = Point2(1, 2);
+    println!("{}, {}", p2.0, p2.1);
+
+    let heap_p = MyBox::new(p2);
+    println!("{}, {}", heap_p.value.0, heap_p.1);
+    (*heap_p).0;
+
+    drop(heap_p);
+
     let p = Point::new(1, 2);
     let p2 = Point {
         x: p.x + 10,
@@ -129,6 +227,8 @@ fn main() {
     println!("{:?}", p);
 
     let key = KeyVal(1);
+    key.0;
+
     let id = Id {};
     let p2 = Point { x: p.x + 10, ..p };
 
@@ -152,5 +252,4 @@ fn main() {
     let a = -1i32.abs();
 
     println!("{}", 666.to_my_fmt_str());
-
 }
