@@ -1,7 +1,7 @@
 [workspace]
 members=[
     "guess_number", "hello_macro",
-    "helloworld", "httpie", "mlist", "mverify-server",
+    "helloworld", "httpie", "libca", "mlist", "mverify-server",
     "scrape_url", "simple_server",
     "tests",
 ]
