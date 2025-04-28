@@ -164,17 +164,17 @@ struct GPoint<T> {
     y: T,
 }
 
-trait Compare{
+trait Compare {
     fn compare(&self, other: &Self) -> i8;
 }
 
-fn max<T : Compare>(a: T, b: T) -> T {
+fn max<T: Compare>(a: T, b: T) -> T {
     if a.compare(&b) > 0 { a } else { b }
 }
 
 impl<T> GPoint<T>
 where
-    T: Sub<Output = T> + Mul<Output = T> + Copy + PartialOrd + From<u8>
+    T: Sub<Output = T> + Mul<Output = T> + Copy + PartialOrd + From<u8>,
 {
     fn distance_to(&self, other: &GPoint<T>) -> T
     where
@@ -184,10 +184,11 @@ where
         let dy = self.y - other.y;
         let dx_squared = dx * dx;
         let dy_squared = dy * dy;
-        let distance_squared = dx_squared + dy_squared;
-
-        // 假设 T 可以调用 sqrt 函数，例如 f32 或 f64
-        T::from(2).sqrt() * distance_squared.sqrt()
+        dx_squared
+        // let distance_squared = dx_squared + dy_squared;
+        //
+        // // 假设 T 可以调用 sqrt 函数，例如 f32 或 f64
+        // T::from(2).sqrt() * distance_squared.sqrt()
     }
 }
 
@@ -255,10 +256,10 @@ fn test1() {
 }
 
 fn main() {
-    let arr = vec![1, 2, 3,4, 5];
+    let arr = vec![1, 2, 3, 4, 5];
     for i in arr.iter() {
         println!("{}", i);
     }
-    let sum = arr.iter().sum();
+    let sum: i32 = arr.iter().sum();
     println!("sum = {}", sum);
 }
